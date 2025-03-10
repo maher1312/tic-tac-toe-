@@ -1,6 +1,4 @@
-Here’s an updated version of the `README.md` file with more details about the relationship between classes and methods:
 
----
 
 # Tic Tac Toe Game
 

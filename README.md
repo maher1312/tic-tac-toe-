@@ -7,6 +7,14 @@ Here’s an edited version of the `README.md` file with improved structure, clar
 This is a simple Tic Tac Toe game implemented in Java. The game supports two modes:
 1. **1v1**: Two players can play against each other.
 2. **1vAI**: A player can play against a basic AI.
+## Difficulty Levels
+
+The game now includes two difficulty levels for the AI:
+1. **Easy**: The AI makes random moves.
+2. **hard**: The AI uses a basic strategy to block the player and prioritize winning moves.
+
+
+When starting a game in 1vAI mode, you will be prompted to select the difficulty level.
 
 ---
 

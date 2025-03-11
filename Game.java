@@ -258,15 +258,17 @@ public void setCellToO(String input){
                    (map.getCell(0, 0).getClass() == cellClass && map.getCell(1, 1).getClass() == cellClass && map.getCell(2, 2).getClass() == cellClass) ||
                    (map.getCell(0, 2).getClass() == cellClass && map.getCell(1, 1).getClass() == cellClass && map.getCell(2, 0).getClass() == cellClass);
         }
-    //int x, y;      // if the not lose method did not work return this to the method
-    //do {
-       // x = (int)(Math.random()*3);
-       // y = (int)(Math.random()*3);
-    //} while ( x >= map.getx() || y >= map.gety() || !(map.getCell(x,y) instanceof Empty_cell));
-    //map.setCell(new O_cell(x,y));
-    //nmbOfMoves++;
-//}
-    public void play1vAI(){
+        public void autoGenerateO_Easy(){
+            int x, y;
+            do {
+                x = (int)(Math.random()*3);
+                y = (int)(Math.random()*3);
+            } while ( x >= map.getx() || y >= map.gety() || !(map.getCell(x,y) instanceof Empty_cell));
+            map.setCell(new O_cell(x,y));
+            nmbOfMoves++;
+        }
+    
+    public void play1vAI_Hard(){
         while (gameState=="playing"){
             map.toString();
             handleInput();
@@ -296,6 +298,37 @@ public void setCellToO(String input){
             System.out.println("Tie");
         }
 }
+public void play1vAI_Easy(){
+    while (gameState=="playing"){
+        map.toString();
+        handleInput();
+        if (turn == user1.getName()){
+            setCellToX(input);
+            XWIns();
+            flipTurnAi(turn);
+        }
+        else{
+            
+            autoGenerateO_Easy();
+            OWIns();
+            flipTurnAi(turn);
+        }
+        tie();
+    }
+    if (gameState=="x wins"){
+        map.toString();
+        System.out.println("X wins");
+    }
+    else if (gameState=="o wins"){
+        map.toString();
+        System.out.println("O wins");
+    }
+    else if (gameState=="tie"){
+        map.toString();
+        System.out.println("Tie");
+    }
+}
+
 
     public void play1v1(){
         gameState="playing";
@@ -329,6 +362,8 @@ public void setCellToO(String input){
             System.out.println("Tie");
         }
     }
+
+    
     public void handleInput() {
        if( turn == ai.getName())
        { System.out.println("AI's turn");}

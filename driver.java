@@ -14,7 +14,20 @@ public class driver {
             game.play1v1();
         }
         else if(choice == 2){
-            game.play1vAI();
+            System.out.println("chooose the difficulty level");
+            System.out.println("1. Easy");
+            System.out.println("2. hard");
+            int level = scanner.nextInt();
+            if(level == 1){
+                game.play1vAI_Easy();
+            }
+            else if(level == 2){
+                game.play1vAI_Hard();
+            }
+            else{
+                System.out.println("Invalid choice");
+            }
+            
         }
         else{
             System.out.println("Invalid choice");

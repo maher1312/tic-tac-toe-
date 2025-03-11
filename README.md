@@ -1,4 +1,6 @@
+Here’s an edited version of the `README.md` file with improved structure, clarity, and additional details:
 
+---
 
 # Tic Tac Toe Game
 
@@ -68,7 +70,7 @@ The project consists of the following classes, each with a specific role in the 
      - `isFeasable(String input)`: Checks if the selected cell is empty and valid.
      - `flipTurn(String turn)`: Switches the turn between two players in 1v1 mode.
      - `flipTurnAi(String turn)`: Switches the turn between the player and the AI in 1vAI mode.
-     - `autoGenerateO()`: Randomly places an O on the grid for the AI's turn.
+     - `autoGenerateO()`: Implements a basic AI strategy to place an O on the grid.
      - `play1v1()`: Handles the game flow for 1v1 mode.
      - `play1vAI()`: Handles the game flow for 1vAI mode.
      - `handleInput()`: Processes player input and validates it.
@@ -92,6 +94,22 @@ The project consists of the following classes, each with a specific role in the 
 
 ---
 
+### 9. **Human_user.java**
+   - **Description**: Represents a human player in the game.
+   - **Key Methods**:
+     - `Human_user(String name)`: Constructor initializes a human player with a given name.
+     - `getName()`: Returns the name of the human player.
+
+---
+
+### 10. **Computer_user.java**
+   - **Description**: Represents the AI player in the game.
+   - **Key Methods**:
+     - `Computer_user()`: Constructor initializes the AI player with the name "AI".
+     - `getName()`: Returns the name of the AI player.
+
+---
+
 ## Class Relationships
 
 - **Cell** is the base class for all cell types (`Empty_cell`, `X_cell`, `O_cell`). It provides common functionality for all cells.
@@ -99,6 +117,7 @@ The project consists of the following classes, each with a specific role in the 
 - **Game** interacts with the `Map` class to update the grid based on player moves and checks for win/tie conditions.
 - **Input** provides constants that are used by the `Game` class to validate player input.
 - **driver** initializes the game and interacts with the `Game` class to start the appropriate game mode.
+- **Human_user** and **Computer_user** extend the `User` class to represent human and AI players, respectively.
 
 ---
 
@@ -128,7 +147,7 @@ The project consists of the following classes, each with a specific role in the 
 
 - **Color-coded output**: X is displayed in red, and O is displayed in blue.
 - **Input validation**: The game ensures that players can only place their marks in empty cells.
-- **Basic AI**: The AI randomly selects an empty cell to place its mark.
+- **Basic AI**: The AI uses a simple strategy to place its mark, prioritizing winning moves, blocking the player, and selecting the center or corners.
 
 ---
 
@@ -137,6 +156,7 @@ The project consists of the following classes, each with a specific role in the 
 - **Enhanced AI**: Implement a more sophisticated AI using algorithms like Minimax for better decision-making.
 - **GUI**: Add a graphical user interface for a more interactive experience.
 - **Multiplayer**: Implement an online multiplayer mode.
+- **Score Tracking**: Add a feature to track scores across multiple games.
 
 ---
 
@@ -156,4 +176,5 @@ java driver
 ```
 
 Enjoy playing Tic Tac Toe!
-```
+
+---

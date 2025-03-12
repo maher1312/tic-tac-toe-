@@ -22,138 +22,61 @@ public class Game {
        this.map=map;
        
     }
-
-    public void setCellToX(String input){
-        
-        switch(input)
-        {
+    public int[] getCoordinates(String input) {
+        int x = -1, y = -1;
+        switch (input) {
             case "A1":
-                map.setCell(new X_cell(0,0));
-                nmbOfMoves++;
+                x = 0; y = 0;
                 break;
             case "A2":
-                map.setCell(new X_cell(1,0));
-                nmbOfMoves++;
+                x = 1; y = 0;
                 break;
             case "A3":
-                map.setCell(new X_cell(2,0));
-                nmbOfMoves++;
+                x = 2; y = 0;
                 break;
             case "B1":
-                map.setCell(new X_cell(0,1));
-                nmbOfMoves++;
-                break;  
-            case "B2":
-                map.setCell(new X_cell(1,1));
-                nmbOfMoves++;
-                break;  
-            case "B3":
-                map.setCell(new X_cell(2,1));
-                nmbOfMoves++;
+                x = 0; y = 1;
                 break;
-            case "C1":  
-                map.setCell(new X_cell(0,2));
-                nmbOfMoves++;
+            case "B2":
+                x = 1; y = 1;
+                break;
+            case "B3":
+                x = 2; y = 1;
+                break;
+            case "C1":
+                x = 0; y = 2;
                 break;
             case "C2":
-                map.setCell(new X_cell(1,2));
-                nmbOfMoves++;
+                x = 1; y = 2;
                 break;
             case "C3":
-                map.setCell(new X_cell(2,2));
-                nmbOfMoves++;
-                break;
-    } 
- 
-    
-}
-
-public void setCellToO(String input){
-    
-        switch(input)
-        {
-            case "A1":
-                map.setCell(new O_cell(0,0));
-                nmbOfMoves++;
-                break;
-            case "A2":
-                map.setCell(new O_cell(1,0));
-                nmbOfMoves++;
-                break;
-            case "A3":
-                map.setCell(new O_cell(2,0));
-                nmbOfMoves++;
-                break;
-            case "B1":
-                map.setCell(new O_cell(0,1));
-                nmbOfMoves++;
-                break;  
-            case "B2":
-                map.setCell(new O_cell(1,1));
-                nmbOfMoves++;
-                break;  
-            case "B3":
-                map.setCell(new O_cell(2,1));
-                nmbOfMoves++;
-                break;
-            case "C1":  
-                map.setCell(new O_cell(0,2));
-                nmbOfMoves++;
-                break;
-            case "C2":
-                map.setCell(new O_cell(1,2));
-                nmbOfMoves++;
-                break;
-            case "C3":
-                map.setCell(new O_cell(2,2));
-                nmbOfMoves++;
+                x = 2; y = 2;
                 break;
         }
-    
-}
+        return new int[]{x, y};
+    }
+    public void setCellOnMap(String input){
+        int x = getCoordinates(input)[0];
+        int y = getCoordinates(input)[1];
+        nmbOfMoves++;
+        if (turn==user1.getName()){
+           map.setCell(new X_cell(x,y));
+        }
+        else{
+            if(turn==user2.getName()){
+                map.setCell(new O_cell(x,y));
+            }
+            else if(turn==ai.getName()){
+                map.setCell(new O_cell(x,y));
+            }
+        }
+    }    
 
     public boolean isFeasable(String input){
-        switch(input)
-        {
-            case "A1":
-                if(map.getCell(0,0) instanceof Empty_cell)
-                    return true;
-                break;
-            case "A2":
-                if(map.getCell(1,0) instanceof Empty_cell)
-                    return true;
-                break;
-            case "A3":
-                if(map.getCell(2,0) instanceof Empty_cell)
-                    return true;
-                break;
-            case "B1":
-                if(map.getCell(0,1) instanceof Empty_cell)
-                    return true;
-                break;  
-            case "B2":
-                if(map.getCell(1,1) instanceof Empty_cell)
-                    return true;
-                break;  
-            case "B3":
-                if(map.getCell(2,1) instanceof Empty_cell)
-                    return true;
-                break;
-            case "C1":  
-                if(map.getCell(0,2) instanceof Empty_cell)
-                    return true;
-                break;
-            case "C2":
-                if(map.getCell(1,2) instanceof Empty_cell)
-                    return true;
-                break;
-            case "C3":
-                if(map.getCell(2,2) instanceof Empty_cell)
-                    return true;
-                break;
-        }
-        return false;
-    } 
+        int x = getCoordinates(input)[0];
+        int y= getCoordinates(input)[1];
+        return (map.getCell(x, y) instanceof Empty_cell);
+    }
 
     public void flipTurn(String turn){
         if (turn == user1.getName()){
@@ -273,14 +196,14 @@ public void setCellToO(String input){
             map.toString();
             handleInput();
             if (turn == user1.getName()){
-                setCellToX(input);
-                XWIns();
+                setCellOnMap(input);
+                win();
                 flipTurnAi(turn);
             }
             else{
                 
                 autoGenerateO();
-                OWIns();
+                win();
                 flipTurnAi(turn);
             }
             tie();
@@ -303,14 +226,14 @@ public void play1vAI_Easy(){
         map.toString();
         handleInput();
         if (turn == user1.getName()){
-            setCellToX(input);
-            XWIns();
+            setCellOnMap(input);
+            win();
             flipTurnAi(turn);
         }
         else{
             
             autoGenerateO_Easy();
-            OWIns();
+            win();
             flipTurnAi(turn);
         }
         tie();
@@ -337,13 +260,13 @@ public void play1vAI_Easy(){
             map.toString();
             handleInput();
             if (turn == user1.getName()){
-                setCellToX(input);
-                XWIns();
+                setCellOnMap(input);
+                win();
                 flipTurn(turn);
             }
             else{
-                setCellToO(input);
-                OWIns();
+                setCellOnMap(input);
+               win();
                 flipTurn(turn);
             }
             tie();
@@ -399,63 +322,27 @@ public void play1vAI_Easy(){
         } while (!input.equals(Input.A1) && !input.equals(Input.A2) && !input.equals(Input.A3) && !input.equals(Input.B1) && !input.equals(Input.B2) && !input.equals(Input.B3) && !input.equals(Input.C1) && !input.equals(Input.C2) && !input.equals(Input.C3));
            
     }
-    }        
+    }    
 
-    public void XWIns() {
-        if (map.getCell(0,0) instanceof X_cell && map.getCell(1,0) instanceof X_cell && map.getCell(2,0) instanceof X_cell){
-            gameState="x wins";
-            
-        }
-        else if (map.getCell(0,1) instanceof X_cell && map.getCell(1,1) instanceof X_cell && map.getCell(2,1) instanceof X_cell){
-            gameState="x wins";
-        }
-        else if (map.getCell(0,2) instanceof X_cell && map.getCell(1,2) instanceof X_cell && map.getCell(2,2) instanceof X_cell){
-            gameState="x wins";
-        }
-        else if (map.getCell(0,0) instanceof X_cell && map.getCell(0,1) instanceof X_cell && map.getCell(0,2) instanceof X_cell){
-            gameState="x wins";
-        }
-        else if (map.getCell(1,0) instanceof X_cell && map.getCell(1,1) instanceof X_cell && map.getCell(1,2) instanceof X_cell){
-            gameState="x wins";
-        }
-        else if (map.getCell(2,0) instanceof X_cell && map.getCell(2,1) instanceof X_cell && map.getCell(2,2) instanceof X_cell){
-            gameState="x wins";
-        }
-        else if (map.getCell(0,0) instanceof X_cell && map.getCell(1,1) instanceof X_cell && map.getCell(2,2) instanceof X_cell){
-            gameState="x wins";
-        }
-        else if (map.getCell(0,2) instanceof X_cell && map.getCell(1,1) instanceof X_cell && map.getCell(2,0) instanceof X_cell){
-            gameState="x wins";
-        }
-        // No action needed here
+public void win(){
+    if (map.getCell(0, 0).sameClassType(map.getCell(1, 0)) && map.getCell(1, 0).sameClassType(map.getCell(2, 0)) && !(map.getCell(2, 0) instanceof Empty_cell)) {
+        gameState = map.getCell(0, 0) instanceof X_cell ? "x wins" : "o wins";
+    } else if (map.getCell(0, 1).sameClassType(map.getCell(1, 1)) && map.getCell(1, 1).sameClassType(map.getCell(2, 1)) && !(map.getCell(2, 1) instanceof Empty_cell)) {
+        gameState = map.getCell(0, 1) instanceof X_cell ? "x wins" : "o wins";
+    } else if (map.getCell(0, 2).sameClassType(map.getCell(1, 2)) && map.getCell(1, 2).sameClassType(map.getCell(2, 2)) && !(map.getCell(2, 2) instanceof Empty_cell)) {
+        gameState = map.getCell(0, 2) instanceof X_cell ? "x wins" : "o wins";
+    } else if (map.getCell(0, 0).sameClassType(map.getCell(0, 1)) && map.getCell(0, 1).sameClassType(map.getCell(0, 2)) && !(map.getCell(0, 2) instanceof Empty_cell)) {
+        gameState = map.getCell(0, 0) instanceof X_cell ? "x wins" : "o wins";
+    } else if (map.getCell(1, 0).sameClassType(map.getCell(1, 1)) && map.getCell(1, 1).sameClassType(map.getCell(1, 2)) && !(map.getCell(1, 2) instanceof Empty_cell)) {
+        gameState = map.getCell(1, 0) instanceof X_cell ? "x wins" : "o wins";
+    } else if (map.getCell(2, 0).sameClassType(map.getCell(2, 1)) && map.getCell(2, 1).sameClassType(map.getCell(2, 2)) && !(map.getCell(2, 2) instanceof Empty_cell)) {
+        gameState = map.getCell(2, 0) instanceof X_cell ? "x wins" : "o wins";
+    } else if (map.getCell(0, 0).sameClassType(map.getCell(1, 1)) && map.getCell(1, 1).sameClassType(map.getCell(2, 2)) && !(map.getCell(2, 2) instanceof Empty_cell)) {
+        gameState = map.getCell(0, 0) instanceof X_cell ? "x wins" : "o wins";
+    } else if (map.getCell(0, 2).sameClassType(map.getCell(1, 1)) && map.getCell(1, 1).sameClassType(map.getCell(2, 0)) && !(map.getCell(2, 0) instanceof Empty_cell)) {
+        gameState = map.getCell(0, 2) instanceof X_cell ? "x wins" : "o wins";
     }
-
-    public void OWIns() {
-        if (map.getCell(0,0) instanceof O_cell && map.getCell(1,0) instanceof O_cell && map.getCell(2,0) instanceof O_cell){
-            gameState="o wins";
-        }
-        else if (map.getCell(0,1) instanceof O_cell && map.getCell(1,1) instanceof O_cell && map.getCell(2,1) instanceof O_cell){
-            gameState="o wins";
-        }
-        else if (map.getCell(0,2) instanceof O_cell && map.getCell(1,2) instanceof O_cell && map.getCell(2,2) instanceof O_cell){
-            gameState="o wins";
-        }
-        else if (map.getCell(0,0) instanceof O_cell && map.getCell(0,1) instanceof O_cell && map.getCell(0,2) instanceof O_cell){
-            gameState="o wins";
-        }
-        else if (map.getCell(1,0) instanceof O_cell && map.getCell(1,1) instanceof O_cell && map.getCell(1,2) instanceof O_cell){
-            gameState="o wins";
-        }
-        else if (map.getCell(2,0) instanceof O_cell && map.getCell(2,1) instanceof O_cell && map.getCell(2,2) instanceof O_cell){
-            gameState="o wins";
-        }
-        else if (map.getCell(0,0) instanceof O_cell && map.getCell(1,1) instanceof O_cell && map.getCell(2,2) instanceof O_cell){
-            gameState="o wins";
-        }
-        else if (map.getCell(0,2) instanceof O_cell && map.getCell(1,1) instanceof O_cell && map.getCell(2,0) instanceof O_cell){
-            gameState="o wins";
-        }
-        // No action needed here
+        // Add your logic here
     }
 
     public void tie(){

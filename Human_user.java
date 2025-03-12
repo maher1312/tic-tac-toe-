@@ -4,9 +4,6 @@ public class Human_user extends User {
     public Human_user(String name) {
         super(name);
     }
-    @Override
-    public String getName() {
-        return super.getName();
-    }
+    
     
 }

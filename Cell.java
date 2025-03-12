@@ -31,7 +31,9 @@ public abstract class Cell {
     public boolean equals(Cell cell){
         return this.x == cell.getX() && this.y == cell.getY();
     }
-
+public boolean sameClassType(Cell cell){
+    return this.getClass() == (cell.getClass());
+}
     public boolean isAdjacent(Cell cell){
         return Math.abs(this.x - cell.getX()) <= 1 && Math.abs(this.y - cell.getY()) <= 1;
     }

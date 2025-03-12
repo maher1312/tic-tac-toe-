@@ -1,4 +1,4 @@
-Here’s an edited version of the `README.md` file with improved structure, clarity, and additional details:
+Here’s the updated `README.md` file with the adjusted methods from the `Game.java` and `Cell.java` classes:
 
 ---
 
@@ -7,12 +7,12 @@ Here’s an edited version of the `README.md` file with improved structure, clar
 This is a simple Tic Tac Toe game implemented in Java. The game supports two modes:
 1. **1v1**: Two players can play against each other.
 2. **1vAI**: A player can play against a basic AI.
+
 ## Difficulty Levels
 
 The game now includes two difficulty levels for the AI:
 1. **Easy**: The AI makes random moves.
-2. **hard**: The AI uses a basic strategy to block the player and prioritize winning moves.
-
+2. **Hard**: The AI uses a basic strategy to block the player and prioritize winning moves.
 
 When starting a game in 1vAI mode, you will be prompted to select the difficulty level.
 
@@ -30,6 +30,7 @@ The project consists of the following classes, each with a specific role in the 
      - `equals(Cell cell)`: Check if two cells are equal based on their coordinates.
      - `isAdjacent(Cell cell)`: Check if a cell is adjacent to another cell.
      - `cellIsEmpty(Cell cell)`: Check if a cell is empty.
+     - `sameClassType(Cell cell)`: Check if two cells are of the same type (e.g., both are `X_cell` or `O_cell`).
    - **Subclasses**:
      - `Empty_cell.java`: Represents an empty cell.
      - `X_cell.java`: Represents a cell occupied by player X.
@@ -73,17 +74,20 @@ The project consists of the following classes, each with a specific role in the 
    - **Description**: Manages the game logic, including player turns, win conditions, and tie detection.
    - **Key Methods**:
      - `Game(Map map)`: Constructor initializes the game with a map and sets the initial game state.
-     - `setCellToX(String input)`: Places an X on the grid based on the player's input.
-     - `setCellToO(String input)`: Places an O on the grid based on the player's input.
+     - `getCoordinates(String input)`: Converts input (e.g., "A1") into grid coordinates.
+     - `setCellOnMap(String input)`: Places a cell (X or O) on the grid based on the player's input.
      - `isFeasable(String input)`: Checks if the selected cell is empty and valid.
      - `flipTurn(String turn)`: Switches the turn between two players in 1v1 mode.
      - `flipTurnAi(String turn)`: Switches the turn between the player and the AI in 1vAI mode.
-     - `autoGenerateO()`: Implements a basic AI strategy to place an O on the grid.
+     - `autoGenerateO()`: Implements a basic AI strategy to place an O on the grid (Hard mode).
+     - `autoGenerateO_Easy()`: Places an O randomly on the grid (Easy mode).
+     - `tryToWinOrBlock(char player)`: Checks if the AI can win or block the player in the next move.
+     - `checkWin(char player)`: Checks if the specified player has won the game.
      - `play1v1()`: Handles the game flow for 1v1 mode.
-     - `play1vAI()`: Handles the game flow for 1vAI mode.
+     - `play1vAI_Hard()`: Handles the game flow for 1vAI mode with Hard difficulty.
+     - `play1vAI_Easy()`: Handles the game flow for 1vAI mode with Easy difficulty.
      - `handleInput()`: Processes player input and validates it.
-     - `XWIns()`: Checks if player X has won.
-     - `OWIns()`: Checks if player O has won.
+     - `win()`: Checks if a player has won the game.
      - `tie()`: Checks if the game has ended in a tie.
 
 ---
@@ -186,3 +190,4 @@ java driver
 Enjoy playing Tic Tac Toe!
 
 ---
+

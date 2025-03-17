@@ -4,6 +4,8 @@ public class driver {
     public static void main(String[] args) {
         Map map= new Map();
         Game game =new Game(map);
+        String playchoice = "";
+        do{
         System.out.println("Welcome to Tic Tac Toe!");
         System.out.println("do you want to play 1v1 or 1vAI?");
         System.out.println("1. 1v1");
@@ -13,6 +15,7 @@ public class driver {
         
         if(choice == 1){
             game.play1v1();
+            playchoice="valid";
         }
         else if(choice == 2){
             System.out.println("chooose the difficulty level");
@@ -21,20 +24,25 @@ public class driver {
             int level = scanner.nextInt();
             if(level == 1){
                 game.play1vAI_Easy();
+                playchoice="valid";
             }
             else if(level == 2){
                 game.play1vAI_Hard();
+                playchoice="valid";
             }
             else{
                 System.out.println("Invalid choice");
+                playchoice="invalid";
             }
             
         }
         else{
             System.out.println("Invalid choice");
+            playchoice="invalid";
         }
         
        
+       } while(playchoice == "invalid");
     }
-
 }
+

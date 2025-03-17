@@ -10,6 +10,7 @@ public class driver {
         System.out.println("2. 1vAI");
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
+        
         if(choice == 1){
             game.play1v1();
         }
@@ -35,5 +36,5 @@ public class driver {
         
        
     }
-    
+
 }

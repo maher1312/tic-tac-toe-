@@ -22,7 +22,7 @@ public class Game {
        this.map=map;
        
     }
-    public int[] getCoordinates(String input) {
+    public int[] getCoordinates(String input) { //get the coordinates of the input cell
         int x = -1, y = -1;
         switch (input) {
             case "A1":
@@ -55,7 +55,10 @@ public class Game {
         }
         return new int[]{x, y};
     }
-    public void setCellOnMap(String input){
+
+
+
+    public void setCellOnMap(String input){//set the cell on the map X or O depending on the turn
         int x = getCoordinates(input)[0];
         int y = getCoordinates(input)[1];
         nmbOfMoves++;
@@ -72,11 +75,13 @@ public class Game {
         }
     }    
 
-    public boolean isFeasable(String input){
+
+    public boolean isFeasable(String input){//check if the cell is empty or not
         int x = getCoordinates(input)[0];
         int y= getCoordinates(input)[1];
         return (map.getCell(x, y) instanceof Empty_cell);
     }
+
 
     public void flipTurn(String turn){
         if (turn == user1.getName()){
@@ -88,6 +93,8 @@ public class Game {
 
        
     }
+
+    
     public void flipTurnAi(String turn){
         if (turn == user1.getName()){
             this.turn = ai.getName();
@@ -98,7 +105,7 @@ public class Game {
         
         }
     
-        public void autoGenerateO() {
+        public void autoGenerateO() {// this method is for the hard level of the AI player 
             // First, check if O can win in the next move
             if (tryToWinOrBlock('O')) {
                 nmbOfMoves++;
@@ -181,7 +188,10 @@ public class Game {
                    (map.getCell(0, 0).getClass() == cellClass && map.getCell(1, 1).getClass() == cellClass && map.getCell(2, 2).getClass() == cellClass) ||
                    (map.getCell(0, 2).getClass() == cellClass && map.getCell(1, 1).getClass() == cellClass && map.getCell(2, 0).getClass() == cellClass);
         }
-        public void autoGenerateO_Easy(){
+
+
+
+        public void autoGenerateO_Easy(){//generate O randomly in the empty cell
             int x, y;
             do {
                 x = (int)(Math.random()*3);
@@ -190,12 +200,14 @@ public class Game {
             map.setCell(new O_cell(x,y));
             nmbOfMoves++;
         }
+
     
     public void play1vAI_Hard(){
         while (gameState=="playing"){
             map.toString();
-            handleInput();
+           
             if (turn == user1.getName()){
+                handleInput();
                 setCellOnMap(input);
                 win();
                 flipTurnAi(turn);
@@ -221,11 +233,14 @@ public class Game {
             System.out.println("Tie");
         }
 }
+
+
 public void play1vAI_Easy(){
     while (gameState=="playing"){
         map.toString();
-        handleInput();
+        
         if (turn == user1.getName()){
+            handleInput();
             setCellOnMap(input);
             win();
             flipTurnAi(turn);
@@ -288,40 +303,39 @@ public void play1vAI_Easy(){
 
     
     public void handleInput() {
+        String input_tmp="XX";
+        
+boolean finish = false;
        if( turn == ai.getName())
        { System.out.println("AI's turn");}
        else{
-
-        do {
-        
             input = " ";
-            Scanner scanner = new Scanner(System.in);
             if (turn == user1.getName()){
                 System.out.println("X's turn");
             }
             else{
                 System.out.println("O's turn");
             }
-            System.out.print("Enter box index (eg:A1, A2, B1...): ");
+        }
+            
+        
+        while (!finish){
+            Scanner scanner = new Scanner(System.in);
+        do {
+                System.out.print("Enter box index (eg:A1, A2, B1...): ");
             if (scanner.hasNext()) {
-               String input_tmp;
                
-               input_tmp = scanner.next().substring(0, 2).toUpperCase();
-              if (isFeasable(input_tmp)){
-                input = input_tmp;
-                System.out.println(input); 
-              }else {
-                System.out.println("Invalid input please select an empty cell");
-                handleInput();
-              }
-
-            } else {
-                scanner.close();
-                System.out.println("No input provided!");
-            }
-        } while (!input.equals(Input.A1) && !input.equals(Input.A2) && !input.equals(Input.A3) && !input.equals(Input.B1) && !input.equals(Input.B2) && !input.equals(Input.B3) && !input.equals(Input.C1) && !input.equals(Input.C2) && !input.equals(Input.C3));
-           
-    }
+                input_tmp = scanner.next().toUpperCase();
+        } }while (!input_tmp.equals(Input.A1) && !input_tmp.equals(Input.A2) && !input_tmp.equals(Input.A3) && !input_tmp.equals(Input.B1) && !input_tmp.equals(Input.B2) && !input_tmp.equals(Input.B3) && !input_tmp.equals(Input.C1) && !input_tmp.equals(Input.C2) && !input_tmp.equals(Input.C3));
+        if (isFeasable(input_tmp)){
+            input = new String(input_tmp);
+            System.out.println(input); 
+            finish = true;
+          }else {
+           finish = false;
+          }
+        }
+    
     }    
 
 public void win(){
